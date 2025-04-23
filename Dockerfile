@@ -19,10 +19,15 @@ RUN npm run build
 # 使用 Python 镜像来搭建 Flask 后端
 FROM python:3.9-slim
 WORKDIR /backend
-COPY backend/ .
+
+# 复制 requirements.txt 文件
+COPY backend/requirements.txt .
 
 # 安装后端依赖
 RUN pip install -r requirements.txt
+
+# 复制应用文件
+COPY backend/ .
 
 # 启动应用
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
