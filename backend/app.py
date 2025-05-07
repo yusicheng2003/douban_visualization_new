@@ -4,13 +4,23 @@ from flask_cors import CORS
 import pymysql
 from db_config import DB_CONFIG
 import os
-port = int(os.environ.get("PORT", 5000))
 
+from flask import Flask
+from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
+@app.route("/api/some-endpoint", methods=["GET"])
+def some_endpoint():
+    return "Hello, World!"
+
+
 def get_db_connection():
     return pymysql.connect(**DB_CONFIG)
+
+
+
 
 @app.route('/api/top-movies')
 def top_movies():
@@ -31,6 +41,9 @@ def top_movies():
 
     return jsonify({"xAxis": xAxis, "series": series})
 
+
+
+
 @app.route('/api/top-directors')
 def top_directors():
     conn = get_db_connection()
@@ -49,6 +62,9 @@ def top_directors():
     series = [int(row[1]) for row in results]
 
     return jsonify({"xAxis": xAxis, "series": series})
+
+
+
 
 @app.route('/api/movie-types')
 def movie_types():
@@ -77,6 +93,9 @@ def movie_types():
 
     return jsonify(data)
 
+
+
+
 @app.route('/api/runtime-ranges')
 def runtime_ranges():
     conn = get_db_connection()
@@ -101,7 +120,7 @@ def runtime_ranges():
 
     return jsonify(data)
 
-
+port = int(os.environ.get("PORT", 5000))
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=port)
 
