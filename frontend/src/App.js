@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     // 请求后端 API 获取电影评分数据
-    axios.get('http://101.37.168.187:5000/api/top-movies')
+    axios.get('/api/top-movies')
       .then(response => {
         setMovieData(prevState => ({
           ...prevState,
@@ -29,7 +29,7 @@ const App = () => {
       });
 
     // 请求后端 API 获取导演数据
-    axios.get('http://101.37.168.187:5000/api/top-directors')
+    axios.get('/api/top-directors')
       .then(response => {
         setMovieData(prevState => ({
           ...prevState,
@@ -41,7 +41,7 @@ const App = () => {
       });
 
     // 请求后端 API 获取电影类型数据
-    axios.get('http://101.37.168.187:5000/api/movie-types')
+    axios.get('/api/movie-types')
       .then(response => {
         setMovieData(prevState => ({
           ...prevState,
@@ -53,7 +53,7 @@ const App = () => {
       });
 
     // 请求后端 API 获取电影时长数据
-    axios.get('http://101.37.168.187:5000/api/runtime-ranges')
+    axios.get('/api/runtime-ranges')
       .then(response => {
         setMovieData(prevState => ({
           ...prevState,
